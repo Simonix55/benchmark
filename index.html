@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar">
@@ -23,26 +23,34 @@
                 <a href="#coding">Coding Tools</a>
                 <a href="#live">Live Daten</a>
             </div>
-            <button class="refresh-btn" onclick="refreshData()">
-                <span class="refresh-icon">↻</span> Aktualisieren
-            </button>
+            <div class="nav-actions">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Dark Mode">🌙</button>
+                <button class="refresh-btn" onclick="refreshData()">
+                    <span class="refresh-icon">↻</span> Aktualisieren
+                </button>
+            </div>
         </div>
     </nav>
 
     <header class="hero">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-pattern"></div>
+        </div>
         <div class="hero-content">
-            <h1>KI-Agenten Benchmark <span class="year">2026</span></h1>
-            <p class="subtitle">Vergleichen Sie die besten KI-Agenten und Modelle basierend auf aktuellen Benchmarks aus dem Internet</p>
+            <div class="hero-badge">🚀 Aktualisiert: Oktober 2026</div>
+            <h1>KI-Agenten <span class="gradient-text">Benchmark</span></h1>
+            <p class="subtitle">Die umfassendste Vergleichsplattform für KI-Agenten und Modelle. Basierend auf aktuellen Benchmarks aus dem Internet.</p>
             <div class="hero-stats">
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-number" id="total-models">50+</span>
                     <span class="stat-label">Modelle</span>
                 </div>
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-number" id="total-benchmarks">20+</span>
                     <span class="stat-label">Benchmarks</span>
                 </div>
-                <div class="stat">
+                <div class="stat-card">
                     <span class="stat-number" id="last-update">--</span>
                     <span class="stat-label">Letzte Aktualisierung</span>
                 </div>
@@ -80,8 +88,9 @@
         <!-- Overview Section -->
         <section id="overview" class="section">
             <div class="section-header">
-                <h2>Übersicht der besten KI-Agenten</h2>
-                <p>Die führenden KI-Agenten und Modelle im Vergleich</p>
+                <span class="section-badge">Übersicht</span>
+                <h2>Die besten KI-Agenten im Vergleich</h2>
+                <p>Ein Blick auf die führenden KI-Agenten und Modelle</p>
             </div>
             <div class="overview-grid" id="overview-grid">
                 <!-- Dynamisch gefüllt -->
@@ -91,13 +100,14 @@
         <!-- Agents Section -->
         <section id="agents" class="section">
             <div class="section-header">
+                <span class="section-badge">Agenten</span>
                 <h2>KI-Agenten im Detail</h2>
                 <p>Vergleich der beliebtesten KI-Agenten und Coding-Tools</p>
             </div>
             <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('coding')">Coding Agenten</button>
-                <button class="tab-btn" onclick="switchTab('general')">Allgemeine Agenten</button>
-                <button class="tab-btn" onclick="switchTab('open')">Open Source</button>
+                <button class="tab-btn active" onclick="switchTab('coding', event)">💻 Coding Agenten</button>
+                <button class="tab-btn" onclick="switchTab('general', event)">🤖 Allgemeine Agenten</button>
+                <button class="tab-btn" onclick="switchTab('open', event)">🔓 Open Source</button>
             </div>
             <div class="tab-content" id="tab-coding">
                 <div class="agents-grid" id="coding-agents">
@@ -119,14 +129,15 @@
         <!-- Benchmarks Section -->
         <section id="benchmarks" class="section">
             <div class="section-header">
+                <span class="section-badge">Benchmarks</span>
                 <h2>Benchmark-Vergleiche</h2>
-                <p>Leistungsverschiedener Modelle auf verschiedenen Benchmarks</p>
+                <p>Leistung verschiedener Modelle auf verschiedenen Benchmarks</p>
             </div>
             <div class="benchmark-tabs">
-                <button class="benchmark-tab active" onclick="switchBenchmark('livebench')">LiveBench</button>
-                <button class="benchmark-tab" onclick="switchBenchmark('swebench')">SWE-bench</button>
-                <button class="benchmark-tab" onclick="switchBenchmark('gaia')">GAIA</button>
-                <button class="benchmark-tab" onclick="switchBenchmark('arena')">Chatbot Arena</button>
+                <button class="benchmark-tab active" onclick="switchBenchmark('livebench', event)">📊 LiveBench</button>
+                <button class="benchmark-tab" onclick="switchBenchmark('swebench', event)">💻 SWE-bench</button>
+                <button class="benchmark-tab" onclick="switchBenchmark('gaia', event)">🌐 GAIA</button>
+                <button class="benchmark-tab" onclick="switchBenchmark('arena', event)">🏆 Chatbot Arena</button>
             </div>
             <div class="benchmark-content" id="benchmark-livebench">
                 <div class="table-container">
@@ -210,6 +221,7 @@
         <!-- Coding Tools Section -->
         <section id="coding" class="section">
             <div class="section-header">
+                <span class="section-badge">Tools</span>
                 <h2>Coding Tools Vergleich</h2>
                 <p>Die besten KI-Coding-Tools im direkten Vergleich</p>
             </div>
@@ -221,6 +233,7 @@
         <!-- Live Data Section -->
         <section id="live" class="section">
             <div class="section-header">
+                <span class="section-badge">Live</span>
                 <h2>Live-Daten aus dem Internet</h2>
                 <p>Automatisch aktualisierte Daten aus öffentlichen APIs</p>
             </div>
@@ -232,10 +245,13 @@
                         <span class="live-badge">Live</span>
                     </div>
                     <div class="live-content" id="arena-live">
-                        <div class="loading">Lade Daten...</div>
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <span>Lade Daten...</span>
+                        </div>
                     </div>
                     <div class="live-footer">
-                        <a href="https://arena.ai/leaderboard" target="_blank">Quelle: arena.ai</a>
+                        <a href="https://arena.ai/leaderboard" target="_blank">Quelle: arena.ai ↗</a>
                     </div>
                 </div>
                 <div class="live-card">
@@ -245,10 +261,13 @@
                         <span class="live-badge">Live</span>
                     </div>
                     <div class="live-content" id="livebench-live">
-                        <div class="loading">Lade Daten...</div>
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <span>Lade Daten...</span>
+                        </div>
                     </div>
                     <div class="live-footer">
-                        <a href="https://livebench.ai/" target="_blank">Quelle: livebench.ai</a>
+                        <a href="https://livebench.ai/" target="_blank">Quelle: livebench.ai ↗</a>
                     </div>
                 </div>
                 <div class="live-card">
@@ -258,10 +277,13 @@
                         <span class="live-badge">Live</span>
                     </div>
                     <div class="live-content" id="swebench-live">
-                        <div class="loading">Lade Daten...</div>
+                        <div class="loading">
+                            <div class="spinner"></div>
+                            <span>Lade Daten...</span>
+                        </div>
                     </div>
                     <div class="live-footer">
-                        <a href="https://www.swebench.com/" target="_blank">Quelle: swebench.com</a>
+                        <a href="https://www.swebench.com/" target="_blank">Quelle: swebench.com ↗</a>
                     </div>
                 </div>
             </div>
@@ -270,6 +292,7 @@
         <!-- Methodology Section -->
         <section class="section">
             <div class="section-header">
+                <span class="section-badge">Methodik</span>
                 <h2>Methodik & Quellen</h2>
                 <p>Wie wir die Daten sammeln und bewerten</p>
             </div>
@@ -278,37 +301,37 @@
                     <div class="method-icon">📈</div>
                     <h3>LiveBench</h3>
                     <p>23 objective Aufgaben in 7 Kategorien, alle 6 Monate aktualisiert. Misst Reasoning, Coding, Mathematik und mehr.</p>
-                    <a href="https://livebench.ai/" target="_blank">livebench.ai</a>
+                    <a href="https://livebench.ai/" target="_blank">livebench.ai ↗</a>
                 </div>
                 <div class="method-card">
                     <div class="method-icon">🏆</div>
                     <h3>Chatbot Arena</h3>
                     <p>Crowdsourced Human-Preference-Benchmark mit über 1 Million Vergleichen. Elo-basiertes Ranking.</p>
-                    <a href="https://arena.ai/" target="_blank">arena.ai</a>
+                    <a href="https://arena.ai/" target="_blank">arena.ai ↗</a>
                 </div>
                 <div class="method-card">
                     <div class="method-icon">💻</div>
                     <h3>SWE-bench</h3>
                     <p>500 reale GitHub-Issues. Muss durch Code-Änderungen gelöst werden. Der Standard für Coding-Agenten.</p>
-                    <a href="https://www.swebench.com/" target="_blank">swebench.com</a>
+                    <a href="https://www.swebench.com/" target="_blank">swebench.com ↗</a>
                 </div>
                 <div class="method-card">
                     <div class="method-icon">🌐</div>
                     <h3>GAIA</h3>
                     <p>General AI Assistant Benchmark. 466 Aufgaben, die Web-Recherche, Dateien und Code erfordern.</p>
-                    <a href="https://huggingface.co/gaia-benchmark" target="_blank">GAIA Benchmark</a>
+                    <a href="https://huggingface.co/gaia-benchmark" target="_blank">GAIA Benchmark ↗</a>
                 </div>
                 <div class="method-card">
                     <div class="method-icon">🖥️</div>
                     <h3>OSWorld</h3>
                     <p>Computer-Use auf einem echten Ubuntu-Desktop. 369 Multi-App-Workflows.</p>
-                    <a href="https://os-world.github.io/" target="_blank">OSWorld</a>
+                    <a href="https://os-world.github.io/" target="_blank">OSWorld ↗</a>
                 </div>
                 <div class="method-card">
                     <div class="method-icon">📊</div>
                     <h3>Artificial Analysis</h3>
                     <p>Umfassende Analyse von KI-Modellen und Agenten mit Fokus auf Kosten und Performance.</p>
-                    <a href="https://artificialanalysis.ai/" target="_blank">artificialanalysis.ai</a>
+                    <a href="https://artificialanalysis.ai/" target="_blank">artificialanalysis.ai ↗</a>
                 </div>
             </div>
         </section>
@@ -317,7 +340,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>KI-Agenten Benchmark 2026</h4>
+                <h4>⚡ KI-Agenten Benchmark 2026</h4>
                 <p>Ein unabhängiger Vergleich der besten KI-Agenten und Modelle basierend auf öffentlichen Benchmarks.</p>
             </div>
             <div class="footer-section">

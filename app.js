@@ -1,5 +1,32 @@
 // KI-Agenten Benchmark 2026 - App Logik
 
+// Theme Toggle
+function toggleTheme() {
+    const html = document.documentElement;
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    const btn = document.querySelector('.theme-toggle');
+    btn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+}
+
+// Load saved theme
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const btn = document.querySelector('.theme-toggle');
+    if (btn) btn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    
+    renderOverview();
+    renderAgents();
+    renderBenchmarks();
+    renderCodingTools();
+    loadLiveData();
+    updateLastUpdate();
+});
+
 // Fallback-Daten (wenn API nicht erreichbar)
 const fallbackData = {
     livebench: [
@@ -232,16 +259,6 @@ const codingTools = [
     }
 ];
 
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    renderOverview();
-    renderAgents();
-    renderBenchmarks();
-    renderCodingTools();
-    loadLiveData();
-    updateLastUpdate();
-});
-
 // Render Overview
 function renderOverview() {
     const container = document.getElementById('overview-grid');
@@ -395,7 +412,6 @@ function renderCodingTools() {
 // Load Live Data
 async function loadLiveData() {
     try {
-        // Versuche Arena Leaderboard API zu laden
         const response = await fetch('https://api.wulong.dev/arena-ai-leaderboards/v1/leaderboard?name=text');
         if (response.ok) {
             const data = await response.json();
@@ -408,9 +424,7 @@ async function loadLiveData() {
         renderArenaLiveFallback();
     }
 
-    // LiveBench Fallback
     renderLivebenchLive();
-    // SWE-bench Fallback
     renderSwebenchLive();
 }
 
@@ -463,19 +477,19 @@ function renderSwebenchLive() {
 }
 
 // Tab Wechsel
-function switchTab(tab) {
+function switchTab(tab, event) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(content => content.classList.add('hidden'));
     
-    event.target.classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
     document.getElementById('tab-' + tab).classList.remove('hidden');
 }
 
-function switchBenchmark(benchmark) {
+function switchBenchmark(benchmark, event) {
     document.querySelectorAll('.benchmark-tab').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.benchmark-content').forEach(content => content.classList.add('hidden'));
     
-    event.target.classList.add('active');
+    if (event && event.target) event.target.classList.add('active');
     document.getElementById('benchmark-' + benchmark).classList.remove('hidden');
 }
 
