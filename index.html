@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KI-Agenten Benchmark 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">KI-Benchmark</span>
+            </div>
+            <div class="nav-links">
+                <a href="#overview">Übersicht</a>
+                <a href="#agents">Agenten</a>
+                <a href="#benchmarks">Benchmarks</a>
+                <a href="#coding">Coding Tools</a>
+                <a href="#live">Live Daten</a>
+            </div>
+            <button class="refresh-btn" onclick="refreshData()">
+                <span class="refresh-icon">↻</span> Aktualisieren
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>KI-Agenten Benchmark <span class="year">2026</span></h1>
+            <p class="subtitle">Vergleichen Sie die besten KI-Agenten und Modelle basierend auf aktuellen Benchmarks aus dem Internet</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number" id="total-models">50+</span>
+                    <span class="stat-label">Modelle</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="total-benchmarks">20+</span>
+                    <span class="stat-label">Benchmarks</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" id="last-update">--</span>
+                    <span class="stat-label">Letzte Aktualisierung</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">
+                <div class="card-header">🏆 Top Agent</div>
+                <div class="card-body">
+                    <div class="card-title">Claude Fable 5.1</div>
+                    <div class="card-score">83.4%</div>
+                    <div class="card-subtitle">LiveBench Overall</div>
+                </div>
+            </div>
+            <div class="floating-card card-2">
+                <div class="card-header">💻 Coding</div>
+                <div class="card-body">
+                    <div class="card-title">Claude Code</div>
+                    <div class="card-score">8.9/10</div>
+                    <div class="card-subtitle">Agentic Coding</div>
+                </div>
+            </div>
+            <div class="floating-card card-3">
+                <div class="card-header">🌐 Arena</div>
+                <div class="card-body">
+                    <div class="card-title">Claude Fable 5</div>
+                    <div class="card-score">1507</div>
+                    <div class="card-subtitle">ELO Rating</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Overview Section -->
+        <section id="overview" class="section">
+            <div class="section-header">
+                <h2>Übersicht der besten KI-Agenten</h2>
+                <p>Die führenden KI-Agenten und Modelle im Vergleich</p>
+            </div>
+            <div class="overview-grid" id="overview-grid">
+                <!-- Dynamisch gefüllt -->
+            </div>
+        </section>
+
+        <!-- Agents Section -->
+        <section id="agents" class="section">
+            <div class="section-header">
+                <h2>KI-Agenten im Detail</h2>
+                <p>Vergleich der beliebtesten KI-Agenten und Coding-Tools</p>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('coding')">Coding Agenten</button>
+                <button class="tab-btn" onclick="switchTab('general')">Allgemeine Agenten</button>
+                <button class="tab-btn" onclick="switchTab('open')">Open Source</button>
+            </div>
+            <div class="tab-content" id="tab-coding">
+                <div class="agents-grid" id="coding-agents">
+                    <!-- Dynamisch gefüllt -->
+                </div>
+            </div>
+            <div class="tab-content hidden" id="tab-general">
+                <div class="agents-grid" id="general-agents">
+                    <!-- Dynamisch gefüllt -->
+                </div>
+            </div>
+            <div class="tab-content hidden" id="tab-open">
+                <div class="agents-grid" id="open-agents">
+                    <!-- Dynamisch gefüllt -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Benchmarks Section -->
+        <section id="benchmarks" class="section">
+            <div class="section-header">
+                <h2>Benchmark-Vergleiche</h2>
+                <p>Leistungsverschiedener Modelle auf verschiedenen Benchmarks</p>
+            </div>
+            <div class="benchmark-tabs">
+                <button class="benchmark-tab active" onclick="switchBenchmark('livebench')">LiveBench</button>
+                <button class="benchmark-tab" onclick="switchBenchmark('swebench')">SWE-bench</button>
+                <button class="benchmark-tab" onclick="switchBenchmark('gaia')">GAIA</button>
+                <button class="benchmark-tab" onclick="switchBenchmark('arena')">Chatbot Arena</button>
+            </div>
+            <div class="benchmark-content" id="benchmark-livebench">
+                <div class="table-container">
+                    <table class="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Rang</th>
+                                <th>Modell</th>
+                                <th>Overall</th>
+                                <th>Reasoning</th>
+                                <th>Coding</th>
+                                <th>Agentic</th>
+                                <th>Mathematik</th>
+                                <th>Kosten/Task</th>
+                            </tr>
+                        </thead>
+                        <tbody id="livebench-table">
+                            <!-- Dynamisch gefüllt -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="benchmark-content hidden" id="benchmark-swebench">
+                <div class="table-container">
+                    <table class="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Rang</th>
+                                <th>Agent</th>
+                                <th>Modell</th>
+                                <th>Score</th>
+                                <th>Quelle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="swebench-table">
+                            <!-- Dynamisch gefüllt -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="benchmark-content hidden" id="benchmark-gaia">
+                <div class="table-container">
+                    <table class="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Rang</th>
+                                <th>Agent</th>
+                                <th>Modell</th>
+                                <th>Overall</th>
+                                <th>Level 1</th>
+                                <th>Level 2</th>
+                                <th>Level 3</th>
+                            </tr>
+                        </thead>
+                        <tbody id="gaia-table">
+                            <!-- Dynamisch gefüllt -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="benchmark-content hidden" id="benchmark-arena">
+                <div class="table-container">
+                    <table class="benchmark-table">
+                        <thead>
+                            <tr>
+                                <th>Rang</th>
+                                <th>Modell</th>
+                                <th>ELO</th>
+                                <th>Votes</th>
+                                <th>Anbieter</th>
+                            </tr>
+                        </thead>
+                        <tbody id="arena-table">
+                            <!-- Dynamisch gefüllt -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coding Tools Section -->
+        <section id="coding" class="section">
+            <div class="section-header">
+                <h2>Coding Tools Vergleich</h2>
+                <p>Die besten KI-Coding-Tools im direkten Vergleich</p>
+            </div>
+            <div class="coding-grid" id="coding-grid">
+                <!-- Dynamisch gefüllt -->
+            </div>
+        </section>
+
+        <!-- Live Data Section -->
+        <section id="live" class="section">
+            <div class="section-header">
+                <h2>Live-Daten aus dem Internet</h2>
+                <p>Automatisch aktualisierte Daten aus öffentlichen APIs</p>
+            </div>
+            <div class="live-grid">
+                <div class="live-card">
+                    <div class="live-header">
+                        <span class="live-icon">📊</span>
+                        <h3>Chatbot Arena</h3>
+                        <span class="live-badge">Live</span>
+                    </div>
+                    <div class="live-content" id="arena-live">
+                        <div class="loading">Lade Daten...</div>
+                    </div>
+                    <div class="live-footer">
+                        <a href="https://arena.ai/leaderboard" target="_blank">Quelle: arena.ai</a>
+                    </div>
+                </div>
+                <div class="live-card">
+                    <div class="live-header">
+                        <span class="live-icon">🧪</span>
+                        <h3>LiveBench</h3>
+                        <span class="live-badge">Live</span>
+                    </div>
+                    <div class="live-content" id="livebench-live">
+                        <div class="loading">Lade Daten...</div>
+                    </div>
+                    <div class="live-footer">
+                        <a href="https://livebench.ai/" target="_blank">Quelle: livebench.ai</a>
+                    </div>
+                </div>
+                <div class="live-card">
+                    <div class="live-header">
+                        <span class="live-icon">💻</span>
+                        <h3>SWE-bench</h3>
+                        <span class="live-badge">Live</span>
+                    </div>
+                    <div class="live-content" id="swebench-live">
+                        <div class="loading">Lade Daten...</div>
+                    </div>
+                    <div class="live-footer">
+                        <a href="https://www.swebench.com/" target="_blank">Quelle: swebench.com</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Methodology Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Methodik & Quellen</h2>
+                <p>Wie wir die Daten sammeln und bewerten</p>
+            </div>
+            <div class="methodology-grid">
+                <div class="method-card">
+                    <div class="method-icon">📈</div>
+                    <h3>LiveBench</h3>
+                    <p>23 objective Aufgaben in 7 Kategorien, alle 6 Monate aktualisiert. Misst Reasoning, Coding, Mathematik und mehr.</p>
+                    <a href="https://livebench.ai/" target="_blank">livebench.ai</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">🏆</div>
+                    <h3>Chatbot Arena</h3>
+                    <p>Crowdsourced Human-Preference-Benchmark mit über 1 Million Vergleichen. Elo-basiertes Ranking.</p>
+                    <a href="https://arena.ai/" target="_blank">arena.ai</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">💻</div>
+                    <h3>SWE-bench</h3>
+                    <p>500 reale GitHub-Issues. Muss durch Code-Änderungen gelöst werden. Der Standard für Coding-Agenten.</p>
+                    <a href="https://www.swebench.com/" target="_blank">swebench.com</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">🌐</div>
+                    <h3>GAIA</h3>
+                    <p>General AI Assistant Benchmark. 466 Aufgaben, die Web-Recherche, Dateien und Code erfordern.</p>
+                    <a href="https://huggingface.co/gaia-benchmark" target="_blank">GAIA Benchmark</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">🖥️</div>
+                    <h3>OSWorld</h3>
+                    <p>Computer-Use auf einem echten Ubuntu-Desktop. 369 Multi-App-Workflows.</p>
+                    <a href="https://os-world.github.io/" target="_blank">OSWorld</a>
+                </div>
+                <div class="method-card">
+                    <div class="method-icon">📊</div>
+                    <h3>Artificial Analysis</h3>
+                    <p>Umfassende Analyse von KI-Modellen und Agenten mit Fokus auf Kosten und Performance.</p>
+                    <a href="https://artificialanalysis.ai/" target="_blank">artificialanalysis.ai</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>KI-Agenten Benchmark 2026</h4>
+                <p>Ein unabhängiger Vergleich der besten KI-Agenten und Modelle basierend auf öffentlichen Benchmarks.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quellen</h4>
+                <ul>
+                    <li><a href="https://livebench.ai/" target="_blank">LiveBench</a></li>
+                    <li><a href="https://arena.ai/" target="_blank">Chatbot Arena</a></li>
+                    <li><a href="https://www.swebench.com/" target="_blank">SWE-bench</a></li>
+                    <li><a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Benchmarks</h4>
+                <ul>
+                    <li><a href="https://livebench.ai/" target="_blank">LiveBench</a></li>
+                    <li><a href="https://arena.ai/" target="_blank">Chatbot Arena</a></li>
+                    <li><a href="https://www.swebench.com/" target="_blank">SWE-bench</a></li>
+                    <li><a href="https://os-world.github.io/" target="_blank">OSWorld</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 KI-Agenten Benchmark. Daten aus öffentlichen Quellen. Alle Angaben ohne Gewähr.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
